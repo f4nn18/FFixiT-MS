@@ -1,62 +1,32 @@
 \# Entity Relationship Diagram (ERD)
 
-
-
 FixiT Management System (FFixiT-MS)
 
+\---
 
+## Document Information
+
+|-------------|-----------------------|
+| Version | 0.1 |
+| Author | Muhammad Irfan Syafiq |
+| Project | FFixiT-MS |
+| Last Update | 2026-07-08 |
+| Status | Draft |
+|-------------|-----------------------|
 
 \---
 
-
-
-\## Document Information
-
-
-
-|-------------|-----------------------|
-
-| Version     | 0.1                   |
-
-| Author      | Muhammad Irfan Syafiq |
-
-| Project     | FFixiT-MS             |
-
-| Last Update | 2026-07-08            |
-
-| Status      | Draft                 |
-
-|-------------|-----------------------|
-
-
-
-\---
-
-
-
-\# Overview
-
-
+# Overview
 
 Dokumen ini menjelaskan rancangan database FFixiT-MS yang akan digunakan sebagai dasar pengembangan sistem.
 
-
-
 Desain database mengikuti prinsip normalisasi untuk meminimalkan duplikasi data, menjaga integritas data, serta mempermudah pengembangan di masa mendatang.
-
-
 
 \---
 
-
-
-\# Database Design Principles
-
-
+# Database Design Principles
 
 Database dirancang dengan prinsip berikut.
-
-
 
 \- Menggunakan Primary Key `id` pada setiap tabel.
 
@@ -68,13 +38,9 @@ Database dirancang dengan prinsip berikut.
 
 \- Menggunakan Audit Log untuk mencatat aktivitas penting.
 
-\- Seluruh penamaan tabel menggunakan bentuk jamak (plural) dengan format snake\_case.
-
-
+\- Seluruh penamaan tabel menggunakan bentuk jamak (plural) dengan format snake_case.
 
 Contoh:
-
-
 
 ```
 
@@ -90,467 +56,226 @@ stock\_movements
 
 ```
 
-
-
-\---
-
-
+---
 
 \# Entity List
 
-
-
-\## Authentication
-
-
+## Authentication
 
 \### users
 
-
-
 Menyimpan akun pengguna sistem.
-
-
 
 \### roles
 
-
-
 Daftar role pengguna.
-
-
 
 \---
 
-
-
-\## Customer
-
-
+## Customer
 
 \### customers
 
-
-
 Menyimpan informasi customer.
-
-
 
 \---
 
-
-
-\## Employee
-
-
+## Employee
 
 \### employees
 
-
-
 Data karyawan.
-
-
 
 \---
 
-
-
-\## Service
-
-
+## Service
 
 \### tickets
 
-
-
 Data utama service.
 
-
-
-\### ticket\_progresses
-
-
+\### ticket_progresses
 
 Riwayat progress pengerjaan.
 
+\### ticket_photos
 
+Evidence Before & After.
 
-\### ticket\_photos
-
-
-
-Evidence Before \& After.
-
-
-
-\### ticket\_parts
-
-
+\### ticket_parts
 
 Sparepart yang digunakan.
 
-
-
-\### ticket\_cancellations
-
-
+\### ticket_cancellations
 
 Riwayat pembatalan tiket.
 
-
-
-\### ticket\_warranties
-
-
+\### ticket_warranties
 
 Riwayat garansi.
 
-
-
 \---
 
-
-
-\## Inventory
-
-
+## Inventory
 
 \### suppliers
 
-
-
 Data supplier.
-
-
 
 \### categories
 
-
-
 Kategori barang.
-
-
 
 \### products
 
-
-
 Master barang.
 
-
-
-\### stock\_movements
-
-
+\### stock_movements
 
 Riwayat keluar masuk stock.
 
-
-
-\### purchase\_transactions
-
-
+\### purchase_transactions
 
 Pembelian stock.
 
-
-
-\### purchase\_transaction\_items
-
-
+\### purchase_transaction_items
 
 Detail pembelian.
 
-
-
 \---
 
-
-
 \## Sales
-
-
 
 \### sales
 
-
-
 Invoice penjualan.
 
-
-
-\### sale\_items
-
-
+\### sale_items
 
 Detail barang yang dijual.
 
-
-
 \---
 
+## Operational
 
-
-\## Operational
-
-
-
-\### operational\_expenses
-
-
+\### operational_expenses
 
 Pengeluaran operasional.
 
-
-
-\### expense\_categories
-
-
+\### expense_categories
 
 Kategori pengeluaran.
 
-
-
 \---
-
-
 
 \## Audit
 
-
-
-\### audit\_logs
-
-
+\### audit_logs
 
 Riwayat aktivitas pengguna.
 
-
-
 \---
 
+# Entity Relationships
 
-
-\# Entity Relationships
-
-
-
-\## User
-
-
+## User
 
 ```
-
 Role
-
-
-
 1
-
 │
-
 └────────────∞ Users
-
 ```
 
-
-
-\---
-
-
+---
 
 \## Customer
 
-
-
 ```
-
 Customer
-
-
-
 1
-
 │
-
 └────────────∞ Tickets
-
 ```
 
-
-
-\---
-
-
+---
 
 \## Employee
 
-
-
 ```
-
 Employee
-
-
-
 1
-
 │
-
 └────────────∞ Tickets (Technician)
-
 ```
 
-
-
-\---
-
-
+---
 
 \## Ticket
 
-
-
 ```
-
 Ticket
-
-
-
 1
-
-├──────────∞ Ticket Progresses
-
-├──────────∞ Ticket Photos
-
-├──────────∞ Ticket Parts
-
-├──────────1 Ticket Warranty
-
-└──────────0..1 Ticket Cancellation
-
+├────────━∞ Ticket Progresses
+├────────━∞ Ticket Photos
+├────────━∞ Ticket Parts
+├───────── 1 Ticket Warranty
+└─────────0..1 Ticket Cancellation
 ```
 
-
-
-\---
-
-
+---
 
 \## Product
 
-
-
 ```
-
 Category
-
-
-
 1
-
 │
-
 └────────────∞ Products
-
 ```
 
-
-
-\---
-
-
+---
 
 ```
-
 Supplier
-
-
-
 1
-
 │
-
 └────────────∞ Purchase Transactions
-
 ```
 
-
-
-\---
-
-
+---
 
 ```
-
 Purchase Transaction
-
-
-
 1
-
 │
-
 └────────────∞ Purchase Transaction Items
-
 ```
 
-
-
-\---
-
-
+---
 
 ```
-
 Product
-
-
-
 1
-
-├──────────∞ Stock Movements
-
-├──────────∞ Ticket Parts
-
-└──────────∞ Sale Items
-
+├────────━∞ Stock Movements
+├────────━∞ Ticket Parts
+└────────━∞ Sale Items
 ```
 
-
-
-\---
-
-
+---
 
 \## Sales
 
-
-
 ```
-
 Sale
-
-
-
 1
-
 │
-
 └────────────∞ Sale Items
-
 ```
 
-
-
-\---
-
-
+---
 
 \# High Level Database Flow
-
-
 
 ```
 
@@ -612,27 +337,15 @@ Payment
 
 ```
 
-
-
-\---
-
-
+---
 
 \# Naming Convention
 
-
-
 \## Table
-
-
 
 Menggunakan bentuk jamak.
 
-
-
-Contoh
-
-
+Contoh:
 
 ```
 
@@ -644,15 +357,9 @@ tickets
 
 ```
 
-
-
-\---
-
-
+---
 
 \## Primary Key
-
-
 
 ```
 
@@ -660,109 +367,53 @@ id
 
 ```
 
-
-
-\---
-
-
+---
 
 \## Foreign Key
 
-
-
+```
+customer_id
+ticket_id
+product_id
+supplier_id
+user_id
 ```
 
-customer\_id
-
-
-
-ticket\_id
-
-
-
-product\_id
-
-
-
-supplier\_id
-
-
-
-user\_id
-
-```
-
-
-
-\---
-
-
+---
 
 \## Timestamp
 
-
-
 Menggunakan standar Laravel.
 
-
-
+```
+created_at
+updated_at
 ```
 
-created\_at
-
-
-
-updated\_at
-
-```
-
-
-
-\---
-
-
+---
 
 \# Notes
 
-
-
 Beberapa tabel kemungkinan akan ditambahkan selama proses pengembangan apabila ditemukan kebutuhan bisnis baru.
 
+Contoh:\- notifications
 
+\- device_brands
 
-Contoh:
+\- device_models
 
+\- service_checklists
 
+\- payment_methods
 
-\- notifications
-
-\- device\_brands
-
-\- device\_models
-
-\- service\_checklists
-
-\- payment\_methods
-
-\- warranty\_claims
-
-
+\- warranty_claims
 
 Penambahan entity harus tetap mengikuti Business Flow dan Module yang telah ditetapkan sebelumnya.
 
-
-
 \---
-
-
 
 \# Summary
 
-
-
 Database FFixiT-MS dirancang menggunakan pendekatan modular sehingga setiap modul memiliki entity yang terpisah namun saling terhubung melalui relasi.
 
-
-
 Dokumen ini menjadi acuan utama dalam pembuatan Migration, Model Eloquent, serta Diagram ERD pada tahap implementasi.
-

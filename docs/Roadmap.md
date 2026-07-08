@@ -1,62 +1,32 @@
 \# Development Roadmap
 
-
-
 FixiT Management System (FFixiT-MS)
 
-
-
 \---
-
-
 
 \## Document Information
 
-
-
 |-------------|-----------------------|
-
-| Version     | 0.1                   |
-
-| Author      | Muhammad Irfan Syafiq |
-
-| Project     | FFixiT-MS             |
-
-| Last Update | 2026-07-08            |
-
-| Status      | Draft                 |
-
+| Version | 0.1 |
+| Author | Muhammad Irfan Syafiq |
+| Project | FFixiT-MS |
+| Last Update | 2026-07-08 |
+| Status | Draft |
 |-------------|-----------------------|
-
-
 
 \---
-
-
 
 \# Overview
 
-
-
 Roadmap ini menjadi panduan pengembangan FFixiT-MS dari tahap dokumentasi hingga versi stabil (v1.0).
-
-
 
 Setiap milestone disusun berdasarkan prioritas pengembangan sehingga modul yang memiliki dependensi tinggi akan dikerjakan lebih dahulu.
 
-
-
 \---
-
-
 
 \# Development Strategy
 
-
-
 Pengembangan dilakukan secara bertahap dengan prinsip:
-
-
 
 \- Foundation First
 
@@ -68,13 +38,9 @@ Pengembangan dilakukan secara bertahap dengan prinsip:
 
 \- Git Version Control
 
-
-
 Setiap modul harus memenuhi tahapan berikut:
 
-
-
-````````````````
+```
 
 Planning
 
@@ -102,33 +68,19 @@ Git Commit
 
 Git Push
 
-````````````````
-
-
+```
 
 \---
 
-
-
 \# Milestones
-
-
 
 \## v0.1 — Project Foundation ✅
 
-
-
 \### Objectives
-
-
 
 Membangun pondasi proyek.
 
-
-
 \### Scope
-
-
 
 \- Git Repository
 
@@ -146,11 +98,7 @@ Membangun pondasi proyek.
 
 \- ERD Documentation
 
-
-
 Status
-
-
 
 ```
 
@@ -158,27 +106,15 @@ In Progress
 
 ```
 
-
-
 \---
-
-
 
 \## v0.2 — Authentication \& User Management
 
-
-
 \### Objectives
-
-
 
 Membangun sistem autentikasi dan manajemen pengguna.
 
-
-
 \### Features
-
-
 
 \- Login
 
@@ -196,27 +132,15 @@ Membangun sistem autentikasi dan manajemen pengguna.
 
 \- Activate / Deactivate User
 
-
-
 \---
-
-
 
 \## v0.3 — Dashboard
 
-
-
 \### Objectives
-
-
 
 Membangun dashboard untuk setiap role.
 
-
-
 \### Features
-
-
 
 \- Dashboard IT
 
@@ -228,27 +152,15 @@ Membangun dashboard untuk setiap role.
 
 \- Dashboard Teknisi
 
-
-
 \---
-
-
 
 \## v0.4 — Customer Management
 
-
-
 \### Objectives
-
-
 
 Mengelola data customer.
 
-
-
 \### Features
-
-
 
 \- Customer List
 
@@ -262,27 +174,15 @@ Mengelola data customer.
 
 \- Sales History
 
-
-
 \---
-
-
 
 \## v0.5 — Service Ticket
 
-
-
 \### Objectives
-
-
 
 Mengelola seluruh proses service.
 
-
-
 \### Features
-
-
 
 \- Create Ticket
 
@@ -306,27 +206,15 @@ Mengelola seluruh proses service.
 
 \- Ticket Cancellation Request
 
-
-
 \---
-
-
 
 \## v0.6 — Inventory Management
 
-
-
 \### Objectives
-
-
 
 Mengelola inventory toko.
 
-
-
 \### Features
-
-
 
 \- Supplier
 
@@ -344,27 +232,15 @@ Mengelola inventory toko.
 
 \- Stock Movement
 
-
-
 \---
-
-
 
 \## v0.7 — Direct Sales (POS)
 
-
-
 \### Objectives
-
-
 
 Mengelola penjualan sparepart.
 
-
-
 \### Features
-
-
 
 \- Sales Invoice
 
@@ -374,27 +250,15 @@ Mengelola penjualan sparepart.
 
 \- Sales History
 
-
-
 \---
-
-
 
 \## v0.8 — Operational Expense
 
-
-
 \### Objectives
-
-
 
 Mengelola pengeluaran operasional toko.
 
-
-
 \### Features
-
-
 
 \- Expense Category
 
@@ -404,27 +268,15 @@ Mengelola pengeluaran operasional toko.
 
 \- Expense History
 
-
-
 \---
-
-
 
 \## v0.9 — Monitoring \& Reports
 
-
-
 \### Objectives
-
-
 
 Menyediakan informasi operasional toko secara real-time.
 
-
-
 \### Features
-
-
 
 \- Revenue Dashboard
 
@@ -436,27 +288,15 @@ Menyediakan informasi operasional toko secara real-time.
 
 \- Operational Expense Summary
 
-
-
 \---
-
-
 
 \## v1.0 — Stable Release
 
-
-
 \### Objectives
-
-
 
 Menyelesaikan seluruh modul utama.
 
-
-
 \### Features
-
-
 
 \- Audit Log
 
@@ -470,19 +310,11 @@ Menyelesaikan seluruh modul utama.
 
 \- Production Ready
 
-
-
 \---
-
-
 
 \# Development Workflow
 
-
-
 Setiap fitur mengikuti alur berikut:
-
-
 
 ```
 
@@ -562,19 +394,11 @@ Push
 
 ```
 
-
-
 \---
-
-
 
 \# Git Commit Convention
 
-
-
 Jenis commit yang digunakan selama pengembangan.
-
-
 
 | Prefix | Description |
 
@@ -594,11 +418,7 @@ Jenis commit yang digunakan selama pengembangan.
 
 | test | Penambahan atau perubahan testing |
 
-
-
 Contoh:
-
-
 
 ```
 
@@ -622,19 +442,11 @@ chore: configure laravel project
 
 ```
 
-
-
 \---
-
-
 
 \# Long-Term Vision
 
-
-
 Setelah versi 1.0 selesai, FFixiT-MS dapat dikembangkan dengan fitur tambahan seperti:
-
-
 
 \- Barcode / QR Code
 
@@ -656,19 +468,10 @@ Setelah versi 1.0 selesai, FFixiT-MS dapat dikembangkan dengan fitur tambahan se
 
 \- API Integration
 
-
-
 \---
-
-
 
 \# Summary
 
-
-
 FFixiT-MS dikembangkan menggunakan pendekatan modular sehingga setiap milestone dapat diselesaikan secara mandiri tanpa mengganggu modul lain.
 
-
-
 Roadmap ini menjadi acuan utama selama proses pengembangan dan dapat diperbarui sesuai kebutuhan proyek.
-

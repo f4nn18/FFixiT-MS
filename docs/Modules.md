@@ -1,72 +1,38 @@
 \# System Modules
 
-
-
 FFixiT Management System (FFixiT-MS)
 
-
-
 \---
-
-
 
 \## Document Information
 
-
-
 |-------------|-----------------------|
-
-| Version     | 0.1                   |
-
-| Author      | Muhammad Irfan Syafiq |
-
-| Project     | FFixiT-MS             |
-
-| Last Update | 2026-07-08            |
-
-| Status      | Draft                 |
-
+| Version | 0.1 |
+| Author | Muhammad Irfan Syafiq |
+| Project | FFixiT-MS |
+| Last Update | 2026-07-08 |
+| Status | Draft |
 |-------------|-----------------------|
 
 \---
-
-
 
 \# Overview
 
-
-
 Dokumen ini menjelaskan seluruh modul utama yang akan dikembangkan pada FFixiT-MS beserta tujuan, pengguna yang memiliki akses, dan fungsi utama setiap modul.
-
-
 
 Modul dirancang secara modular agar mudah dikembangkan, dipelihara, dan diperluas pada versi berikutnya.
 
-
-
 \---
-
-
 
 \# Module List
 
-
-
 \## 1. Authentication
-
-
 
 \### Purpose
 
-
-
 Mengelola proses autentikasi pengguna sebelum mengakses sistem.
 
-
-
 \### Main Features
-
-
 
 \- Login
 
@@ -76,35 +42,19 @@ Mengelola proses autentikasi pengguna sebelum mengakses sistem.
 
 \- Remember Login
 
-
-
 \### Accessible By
-
-
 
 \- Semua User
 
-
-
-\---
-
-
+---
 
 \## 2. Dashboard
 
-
-
 \### Purpose
-
-
 
 Menampilkan informasi sesuai dengan role pengguna.
 
-
-
 \### Main Features
-
-
 
 \- Ringkasan aktivitas
 
@@ -114,11 +64,7 @@ Menampilkan informasi sesuai dengan role pengguna.
 
 \- Informasi real-time
 
-
-
 \### Accessible By
-
-
 
 \- IT
 
@@ -130,27 +76,15 @@ Menampilkan informasi sesuai dengan role pengguna.
 
 \- Teknisi
 
-
-
-\---
-
-
+---
 
 \## 3. Customer Management
 
-
-
 \### Purpose
-
-
 
 Mengelola data customer.
 
-
-
 \### Main Features
-
-
 
 \- Tambah Customer
 
@@ -162,37 +96,21 @@ Mengelola data customer.
 
 \- Riwayat Pembelian
 
-
-
 \### Accessible By
-
-
 
 \- CS
 
 \- IT
 
-
-
-\---
-
-
+---
 
 \## 4. Service Ticket
 
-
-
 \### Purpose
-
-
 
 Mengelola seluruh proses service mulai dari penerimaan perangkat hingga selesai.
 
-
-
 \### Main Features
-
-
 
 \- Create Ticket
 
@@ -214,11 +132,7 @@ Mengelola seluruh proses service mulai dari penerimaan perangkat hingga selesai.
 
 \- Ticket Cancellation Request
 
-
-
 \### Accessible By
-
-
 
 \- CS
 
@@ -226,27 +140,15 @@ Mengelola seluruh proses service mulai dari penerimaan perangkat hingga selesai.
 
 \- IT
 
-
-
-\---
-
-
+---
 
 \## 5. Inventory Management
 
-
-
 \### Purpose
-
-
 
 Mengelola persediaan barang.
 
-
-
 \### Main Features
-
-
 
 \- Stock Saat Ini
 
@@ -262,37 +164,21 @@ Mengelola persediaan barang.
 
 \- Request Sparepart
 
-
-
 \### Accessible By
-
-
 
 \- Admin Gudang
 
 \- IT
 
-
-
-\---
-
-
+---
 
 \## 6. Supplier Management
 
-
-
 \### Purpose
-
-
 
 Mengelola data supplier.
 
-
-
 \### Main Features
-
-
 
 \- Tambah Supplier
 
@@ -300,37 +186,21 @@ Mengelola data supplier.
 
 \- Purchase History
 
-
-
 \### Accessible By
-
-
 
 \- Admin Gudang
 
 \- IT
 
-
-
-\---
-
-
+---
 
 \## 7. Direct Sales (POS)
 
-
-
 \### Purpose
-
-
 
 Melayani penjualan sparepart tanpa proses service.
 
-
-
 \### Main Features
-
-
 
 \- Create Invoice
 
@@ -340,37 +210,21 @@ Melayani penjualan sparepart tanpa proses service.
 
 \- Sales History
 
-
-
 \### Accessible By
-
-
 
 \- CS
 
 \- IT
 
-
-
-\---
-
-
+---
 
 \## 8. Operational Expense
 
-
-
 \### Purpose
-
-
 
 Mencatat seluruh pengeluaran operasional toko.
 
-
-
 \### Main Features
-
-
 
 \- Tambah Pengeluaran
 
@@ -380,37 +234,21 @@ Mencatat seluruh pengeluaran operasional toko.
 
 \- Riwayat Pengeluaran
 
-
-
 \### Accessible By
-
-
 
 \- Kepala Toko
 
 \- IT
 
-
-
-\---
-
-
+---
 
 \## 9. Monitoring \& Reports
 
-
-
 \### Purpose
-
-
 
 Menampilkan kondisi operasional toko secara real-time.
 
-
-
 \### Main Features
-
-
 
 \- Ticket Monitoring
 
@@ -422,37 +260,21 @@ Menampilkan kondisi operasional toko secara real-time.
 
 \- Operational Expense Summary
 
-
-
 \### Accessible By
-
-
 
 \- Kepala Toko
 
 \- IT
 
-
-
-\---
-
-
+---
 
 \## 10. User Management
 
-
-
 \### Purpose
-
-
 
 Mengelola seluruh akun pengguna sistem.
 
-
-
 \### Main Features
-
-
 
 \- Employee Management
 
@@ -464,35 +286,19 @@ Mengelola seluruh akun pengguna sistem.
 
 \- Activate / Deactivate User
 
-
-
 \### Accessible By
-
-
 
 \- IT
 
-
-
-\---
-
-
+---
 
 \## 11. Audit Log
 
-
-
 \### Purpose
-
-
 
 Mencatat seluruh aktivitas penting pengguna sebagai riwayat sistem.
 
-
-
 \### Main Features
-
-
 
 \- Login History
 
@@ -506,23 +312,13 @@ Mencatat seluruh aktivitas penting pengguna sebagai riwayat sistem.
 
 \- Search Log
 
-
-
 \### Accessible By
-
-
 
 \- IT
 
-
-
 \---
 
-
-
 \# Module Dependency
-
-
 
 ```
 
@@ -556,47 +352,37 @@ Dashboard
 
 ```
 
-
-
 \---
-
-
 
 \# Module Access Matrix
 
-
-
-|        Module        | IT | Kepala Toko | Admin Gudang | CS | Teknisi  |
+| Module | IT | Kepala Toko | Admin Gudang | CS | Teknisi |
 
 |----------------------|:--:|:-----------:|:------------:|:--:|:--------:|
 
-| Authentication       | ✅ |     ✅     |      ✅     | ✅ |   ✅    |
+| Authentication | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-| Dashboard            | ✅ |     ✅     |      ✅     | ✅ |   ✅    |
+| Dashboard | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-| Customer Management  | ✅ |     ❌     |      ❌     | ✅ |   ❌    |
+| Customer Management | ✅ | ❌ | ❌ | ✅ | ❌ |
 
-| Service Ticket       | ✅ |     👁️     |      ❌     | ✅ |   ✅    |
+| Service Ticket | ✅ | 👁️ | ❌ | ✅ | ✅ |
 
-| Inventory Management | ✅ |     👁️     |      ✅     | ❌ |   👁️    |
+| Inventory Management | ✅ | 👁️ | ✅ | ❌ | 👁️ |
 
-| Supplier Management  | ✅ |     ❌     |      ✅     | ❌ |   ❌    |
+| Supplier Management | ✅ | ❌ | ✅ | ❌ | ❌ |
 
-| Direct Sales (POS)   | ✅ |     👁️     |      ❌     | ✅ |   ❌    |
+| Direct Sales (POS) | ✅ | 👁️ | ❌ | ✅ | ❌ |
 
-| Operational Expense  | ✅ |     ✅     |      ❌     | ❌ |   ❌    |
+| Operational Expense | ✅ | ✅ | ❌ | ❌ | ❌ |
 
-| Monitoring \& Reports | ✅ |     ✅     |      👁️     | ❌ |   ❌    |
+| Monitoring \& Reports | ✅ | ✅ | 👁️ | ❌ | ❌ |
 
-| User Management      | ✅ |     ❌     |      ❌     | ❌ |   ❌    |
+| User Management | ✅ | ❌ | ❌ | ❌ | ❌ |
 
-| Audit Log            | ✅ |     ❌     |      ❌     | ❌ |   ❌    |
-
-
+| Audit Log | ✅ | ❌ | ❌ | ❌ | ❌ |
 
 \*\*Keterangan\*\*
-
-
 
 \- ✅ Full Access
 
@@ -604,19 +390,11 @@ Dashboard
 
 \- ❌ No Access
 
-
-
 \---
-
-
 
 \# Development Priority
 
-
-
 Modul akan dikembangkan dengan urutan berikut:
-
-
 
 1\. Authentication
 
@@ -640,19 +418,10 @@ Modul akan dikembangkan dengan urutan berikut:
 
 11\. Audit Log
 
-
-
 \---
-
-
 
 \# Summary
 
-
-
 FFixiT-MS terdiri dari sebelas modul utama yang saling terintegrasi. Seluruh modul dirancang menggunakan konsep Role Based Access Control (RBAC) sehingga setiap pengguna hanya dapat mengakses fitur sesuai tanggung jawabnya.
 
-
-
 Pengembangan dilakukan secara bertahap dengan prioritas pada modul inti yang mendukung operasional toko, yaitu autentikasi, manajemen pengguna, ticket service, inventory, dan point of sale.
-

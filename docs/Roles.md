@@ -1,71 +1,40 @@
 \# Roles \& Responsibilities
 
-
-
 FFixiT Management System (FFixiT-MS)
 
-
-
 \---
-
-
 
 \## Document Information
 
-
-
 |-------------|-----------------------|
-| Version     | 0.1                   |
-| Author      | Muhammad Irfan Syafiq |
-| Project     | FFixiT-MS             |
-| Last Update | 2026-07-08            |
-| Status      | Draft                 |
+| Version | 0.1 |
+| Author | Muhammad Irfan Syafiq |
+| Project | FFixiT-MS |
+| Last Update | 2026-07-08 |
+| Status | Draft |
 |-------------|-----------------------|
 
+---
 
-
-
-\---
-
-
-
-\# Overview
-
-
+# Overview
 
 Dokumen ini menjelaskan role pengguna beserta tanggung jawab, hak akses, dan batasan pada sistem FFixiT-MS.
 
+Sistem menggunakan **Role Based Access Control (RBAC)** sehingga setiap pengguna hanya dapat mengakses menu dan fitur sesuai dengan tugasnya.
 
+---
 
-Sistem menggunakan \*\*Role Based Access Control (RBAC)\*\* sehingga setiap pengguna hanya dapat mengakses menu dan fitur sesuai dengan tugasnya.
+# User Roles
 
+## 1. IT (Super Administrator)
 
-
-\---
-
-
-
-\# User Roles
-
-
-
-\## 1. IT (Super Administrator)
-
-
-
-\### Description
-
-
+### Description
 
 IT merupakan Super Administrator yang memiliki akses penuh terhadap sistem.
 
+### Responsibilities
 
-
-\### Responsibilities
-
-
-
-\- Mengelola User
+- Mengelola User
 
 \- Mengelola Role
 
@@ -81,11 +50,7 @@ IT merupakan Super Administrator yang memiliki akses penuh terhadap sistem.
 
 \- Konfigurasi Sistem
 
-
-
-\### Accessible Modules
-
-
+### Accessible Modules
 
 \- Dashboard
 
@@ -103,35 +68,19 @@ IT merupakan Super Administrator yang memiliki akses penuh terhadap sistem.
 
 \- System Configuration
 
-
-
-\### Restrictions
-
-
+### Restrictions
 
 Tidak memiliki batasan akses.
 
-
-
 \---
-
-
 
 \## 2. Kepala Toko
 
-
-
 \### Description
-
-
 
 Kepala Toko bertugas melakukan monitoring operasional toko serta mengelola pengeluaran operasional.
 
-
-
 \### Responsibilities
-
-
 
 \- Monitoring Ticket
 
@@ -143,11 +92,7 @@ Kepala Toko bertugas melakukan monitoring operasional toko serta mengelola penge
 
 \- Menginput Pengeluaran Operasional
 
-
-
-\### Accessible Modules
-
-
+### Accessible Modules
 
 \- Dashboard
 
@@ -157,11 +102,7 @@ Kepala Toko bertugas melakukan monitoring operasional toko serta mengelola penge
 
 \- Reports
 
-
-
-\### Restrictions
-
-
+### Restrictions
 
 \- Tidak dapat mengubah data transaksi.
 
@@ -169,27 +110,15 @@ Kepala Toko bertugas melakukan monitoring operasional toko serta mengelola penge
 
 \- Tidak dapat mengubah inventory.
 
-
-
 \---
-
-
 
 \## 3. Admin Gudang
 
-
-
 \### Description
-
-
 
 Admin Gudang bertanggung jawab terhadap seluruh aktivitas inventory.
 
-
-
 \### Responsibilities
-
-
 
 \- Mengelola Supplier
 
@@ -203,11 +132,7 @@ Admin Gudang bertanggung jawab terhadap seluruh aktivitas inventory.
 
 \- Monitoring Stock
 
-
-
-\### Accessible Modules
-
-
+### Accessible Modules
 
 \- Dashboard
 
@@ -219,11 +144,7 @@ Admin Gudang bertanggung jawab terhadap seluruh aktivitas inventory.
 
 \- Riwayat Inventory
 
-
-
-\### Restrictions
-
-
+### Restrictions
 
 \- Tidak dapat membuat Ticket.
 
@@ -231,27 +152,15 @@ Admin Gudang bertanggung jawab terhadap seluruh aktivitas inventory.
 
 \- Tidak dapat mengubah data Customer.
 
-
-
 \---
-
-
 
 \## 4. Customer Service (CS)
 
-
-
 \### Description
-
-
 
 Customer Service menjadi penghubung antara customer dan teknisi.
 
-
-
 \### Responsibilities
-
-
 
 \- Membuat Ticket
 
@@ -267,11 +176,7 @@ Customer Service menjadi penghubung antara customer dan teknisi.
 
 \- Mengajukan Pembatalan Ticket
 
-
-
-\### Accessible Modules
-
-
+### Accessible Modules
 
 \- Dashboard
 
@@ -283,11 +188,7 @@ Customer Service menjadi penghubung antara customer dan teknisi.
 
 \- Direct Sales
 
-
-
-\### Restrictions
-
-
+### Restrictions
 
 \- Tidak dapat mengubah hasil diagnosis teknisi.
 
@@ -295,27 +196,15 @@ Customer Service menjadi penghubung antara customer dan teknisi.
 
 \- Tidak dapat mengubah inventory.
 
-
-
 \---
-
-
 
 \## 5. Teknisi
 
-
-
 \### Description
-
-
 
 Teknisi bertanggung jawab terhadap proses diagnosis dan pengerjaan service.
 
-
-
 \### Responsibilities
-
-
 
 \- Mengambil Ticket
 
@@ -335,11 +224,7 @@ Teknisi bertanggung jawab terhadap proses diagnosis dan pengerjaan service.
 
 \- Request Sparepart
 
-
-
-\### Accessible Modules
-
-
+### Accessible Modules
 
 \- Dashboard
 
@@ -349,11 +234,7 @@ Teknisi bertanggung jawab terhadap proses diagnosis dan pengerjaan service.
 
 \- Progress Service
 
-
-
-\### Restrictions
-
-
+### Restrictions
 
 \- Tidak dapat membuat Invoice.
 
@@ -363,15 +244,9 @@ Teknisi bertanggung jawab terhadap proses diagnosis dan pengerjaan service.
 
 \- Tidak dapat mengubah Inventory.
 
-
-
 \---
 
-
-
 \# Role Hierarchy
-
-
 
 ```
 
@@ -389,27 +264,15 @@ IT
 
 ```
 
-
-
 IT memiliki akses penuh terhadap seluruh modul.
-
-
 
 Role lainnya hanya memiliki akses sesuai tugas masing-masing.
 
-
-
 \---
-
-
 
 \# Business Rules
 
-
-
 \## Ticket
-
-
 
 \- Ticket dibuat oleh CS.
 
@@ -421,15 +284,9 @@ Role lainnya hanya memiliki akses sesuai tugas masing-masing.
 
 \- Pembatalan Ticket harus melalui approval IT.
 
+---
 
-
-\---
-
-
-
-\## Inventory
-
-
+## Inventory
 
 \- Inventory dikelola oleh Admin Gudang.
 
@@ -437,29 +294,17 @@ Role lainnya hanya memiliki akses sesuai tugas masing-masing.
 
 \- Seluruh perubahan stock tercatat sebagai Stock Movement.
 
+---
 
-
-\---
-
-
-
-\## Invoice
-
-
+## Invoice
 
 \- Invoice hanya dibuat oleh CS.
 
 \- Invoice Service hanya dapat dibuat setelah Teknisi menyelesaikan Ticket.
 
+---
 
-
-\---
-
-
-
-\## Audit Log
-
-
+## Audit Log
 
 \- Seluruh aktivitas pengguna dicatat.
 
@@ -467,15 +312,9 @@ Role lainnya hanya memiliki akses sesuai tugas masing-masing.
 
 \- Audit Log hanya dapat diakses oleh IT.
 
-
-
 \---
 
-
-
 \# Summary
-
-
 
 | Role | Main Responsibility |
 
@@ -490,4 +329,3 @@ Role lainnya hanya memiliki akses sesuai tugas masing-masing.
 | Customer Service | Ticket, Customer, Invoice |
 
 | Teknisi | Diagnosis dan Service |
-
