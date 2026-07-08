@@ -275,65 +275,37 @@ Sale
 
 ---
 
-\# High Level Database Flow
+# High Level Database Flow
 
 ```
+   Customer
+      │
+      ▼
+    Ticket
+      │
+      ├──────── Progress
+      ├──────── Photos
+      ├──────── Parts
+      ├──────── Warranty
+      └──────── Cancellation
 
-Customer
-
-&#x20;     │
-
-&#x20;     ▼
-
-Ticket
-
-&#x20;     │
-
-&#x20;     ├──────── Progress
-
-&#x20;     ├──────── Photos
-
-&#x20;     ├──────── Parts
-
-&#x20;     ├──────── Warranty
-
-&#x20;     └──────── Cancellation
-
-
-
-Parts
-
-&#x20;     │
-
-&#x20;     ▼
-
-Inventory
-
-&#x20;     │
-
-&#x20;     ▼
-
+    Parts
+      │
+      ▼
+  Inventory
+      │
+      ▼
 Stock Movement
 
-
-
-Ticket
-
-&#x20;     │
-
-&#x20;     ▼
-
+   Ticket
+      │
+      ▼
 Invoice (Sales)
 
-
-
-Invoice
-
-&#x20;     │
-
-&#x20;     ▼
-
-Payment
+   Invoice
+      │
+      ▼
+   Payment
 
 ```
 
