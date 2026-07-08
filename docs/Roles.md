@@ -14,19 +14,14 @@ FFixiT Management System (FFixiT-MS)
 
 
 
-| Item | Value |
+|-------------|-----------------------|
+| Version     | 0.1                   |
+| Author      | Muhammad Irfan Syafiq |
+| Project     | FFixiT-MS             |
+| Last Update | 2026-07-08            |
+| Status      | Draft                 |
+|-------------|-----------------------|
 
-|------|-------|
-
-| Version | 0.1 |
-
-| Author | Muhammad Irfan Syafiq |
-
-| Project | FFixiT-MS |
-
-| Last Update | 2026-07-08 |
-
-| Status | Draft |
 
 
 
