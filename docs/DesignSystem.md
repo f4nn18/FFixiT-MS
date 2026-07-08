@@ -3516,6 +3516,334 @@ Muted Text:         #999999
 
 ---
 
+---
+
+# FFixiT Design Rules
+
+FFixiT-MS merupakan sistem operasional toko komputer. Seluruh desain antarmuka harus mengutamakan efisiensi kerja dibandingkan tampilan dekoratif.
+
+Prinsip utama:
+
+- Speed over Decoration
+- Data Visibility over Animation
+- Desktop First
+- Minimal Click
+- Consistent Layout
+- Easy to Learn
+- Responsive
+- Professional Appearance
+
+Setiap halaman harus membantu pengguna menyelesaikan pekerjaan dengan langkah sesedikit mungkin.
+
+---
+
+# Page Layout Standard
+
+Setiap halaman utama wajib menggunakan struktur berikut.
+
+```
+Sidebar
+    │
+Top Navigation
+    │
+Breadcrumb
+    │
+Page Title
+    │
+Action Button
+    │
+Search & Filter
+    │
+Main Content
+    │
+Pagination
+```
+
+Urutan layout tidak boleh diubah tanpa alasan yang jelas.
+
+---
+
+# Dashboard Standard
+
+Seluruh Dashboard menggunakan struktur yang sama.
+
+```
+Summary Cards
+      │
+      ▼
+Charts
+      │
+      ▼
+Recent Activity
+      │
+      ▼
+Latest Transactions
+      │
+      ▼
+Quick Actions
+```
+
+Perbedaan setiap Dashboard hanya terletak pada data yang ditampilkan sesuai Role.
+
+---
+
+# Form Design Rules
+
+Semua Form harus mengikuti aturan berikut.
+
+- Label berada di atas Input.
+- Field wajib diberi tanda (\*).
+- Placeholder hanya digunakan jika diperlukan.
+- Error Validation ditampilkan tepat di bawah field.
+- Button Save berada di kanan bawah.
+- Button Cancel berada di sebelah kiri Save.
+- Form menggunakan maksimal dua kolom pada Desktop.
+- Pada Mobile seluruh field berubah menjadi satu kolom.
+
+---
+
+# Table Design Rules
+
+Seluruh halaman Master Data menggunakan struktur tabel yang sama.
+
+Wajib memiliki:
+
+- Search
+- Filter
+- Refresh
+- Pagination
+- Sort Column
+- Total Records
+- Action Column
+
+Action Column menggunakan urutan berikut.
+
+```
+View
+Edit
+Delete
+```
+
+Apabila Role tidak memiliki hak Edit atau Delete, tombol tidak ditampilkan.
+
+---
+
+# Modal Design Rules
+
+Gunakan Modal Bootstrap dengan ukuran yang konsisten.
+
+Jenis Modal:
+
+- Confirmation
+- Information
+- Warning
+- Success
+- Error
+
+Modal konfirmasi harus memiliki tombol:
+
+- Cancel
+- Confirm
+
+---
+
+# Status Badge Standard
+
+Status Ticket menggunakan warna Bootstrap yang konsisten.
+
+| Status                    | Color     |
+| ------------------------- | --------- |
+| Waiting Technician        | Secondary |
+| Diagnosis                 | Info      |
+| Waiting Customer Approval | Warning   |
+| In Progress               | Primary   |
+| Finished                  | Success   |
+| Waiting Invoice           | Dark      |
+| Paid                      | Success   |
+| Closed                    | Secondary |
+| Cancelled                 | Danger    |
+
+Status lain harus mengikuti standar Bootstrap.
+
+---
+
+# Empty State Rules
+
+Apabila data kosong, tampilkan pesan yang spesifik.
+
+Contoh:
+
+- No Customer Found
+- No Ticket Available
+- No Product Available
+- No Supplier Available
+
+Hindari menggunakan pesan umum seperti:
+
+```
+No Data
+```
+
+---
+
+# Notification Rules
+
+Gunakan Alert Bootstrap.
+
+Jenis notifikasi.
+
+Success
+
+```
+Data saved successfully.
+```
+
+Warning
+
+```
+Please complete all required fields.
+```
+
+Danger
+
+```
+Unable to save data.
+```
+
+Info
+
+```
+No changes detected.
+```
+
+---
+
+# Icon Standard
+
+Gunakan Bootstrap Icons.
+
+Contoh:
+
+Dashboard
+
+```
+bi-speedometer2
+```
+
+Customer
+
+```
+bi-people
+```
+
+Ticket
+
+```
+bi-tools
+```
+
+Inventory
+
+```
+bi-box-seam
+```
+
+Supplier
+
+```
+bi-truck
+```
+
+Sales
+
+```
+bi-receipt
+```
+
+Expense
+
+```
+bi-wallet2
+```
+
+Monitoring
+
+```
+bi-bar-chart
+```
+
+Users
+
+```
+bi-person-badge
+```
+
+Audit
+
+```
+bi-clock-history
+```
+
+Settings
+
+```
+bi-gear
+```
+
+---
+
+# Accessibility Rules
+
+Seluruh halaman harus memenuhi prinsip berikut.
+
+- Kontras warna yang cukup.
+- Seluruh tombol memiliki teks yang jelas.
+- Form dapat digunakan menggunakan keyboard.
+- Focus indicator harus terlihat.
+- Tidak mengandalkan warna sebagai satu-satunya indikator status.
+
+---
+
+# Performance Guidelines
+
+UI harus tetap ringan.
+
+Hindari:
+
+- Animasi berlebihan.
+- Shadow berlebihan.
+- Gradient kompleks.
+- JavaScript yang tidak diperlukan.
+
+Prioritaskan kecepatan loading dibanding efek visual.
+
+---
+
+# Design Checklist
+
+Sebelum halaman dianggap selesai, pastikan:
+
+- Mengikuti Business Flow.
+- Mengikuti Role yang sesuai.
+- Menggunakan Layout Standard.
+- Menggunakan Component Standard.
+- Menggunakan Bootstrap 5.
+- Responsive.
+- Konsisten dengan halaman lain.
+- Tidak menambahkan fitur di luar dokumentasi proyek.
+
+---
+
+# AI Development Reminder
+
+AI tidak diperbolehkan mengubah desain maupun struktur sistem tanpa persetujuan.
+
+Apabila menemukan kebutuhan baru:
+
+1. Jelaskan alasan perubahan.
+2. Berikan rekomendasi.
+3. Tunggu persetujuan sebelum implementasi.
+
 # Summary
 
 This Design System provides a comprehensive foundation for FFixiT-MS frontend development. All components, colors, typography, and layouts are defined for consistency across the entire project.
