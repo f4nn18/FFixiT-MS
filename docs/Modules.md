@@ -196,6 +196,8 @@ Mengelola seluruh proses service mulai dari penerimaan perangkat hingga selesai.
 
 \- Create Ticket
 
+\- Print Service Receipt
+
 \- Assign Technician
 
 \- Diagnosis
@@ -205,6 +207,8 @@ Mengelola seluruh proses service mulai dari penerimaan perangkat hingga selesai.
 \- Progress Service
 
 \- Finish Service
+
+\- Generate Service Invoice
 
 \- Warranty History
 
