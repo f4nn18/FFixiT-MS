@@ -6,13 +6,13 @@ FixiT Management System (FFixiT-MS)
 
 ## Document Information
 
-|-------------|-----------------------|
-| Version | 0.1 |
-| Author | Muhammad Irfan Syafiq |
-| Project | FFixiT-MS |
-| Last Update | 2026-07-08 |
-| Status | Draft |
-|-------------|-----------------------|
+| Item        | Value                 |
+| ----------- | --------------------- |
+| Version     | 0.1                   |
+| Author      | Muhammad Irfan Syafiq |
+| Project     | FFixiT-MS             |
+| Last Update | 2026-07-09            |
+| Status      | Active                |
 
 ---
 
@@ -249,3 +249,11 @@ Kode harus:
 # Goal
 
 Kode FFixiT-MS harus mudah dipahami bahkan oleh developer baru yang bergabung di kemudian hari.
+
+Do not duplicate business logic.
+
+Use Service Classes when business logic becomes complex.
+
+Keep Controllers thin.
+
+Keep Models focused on data relationships.

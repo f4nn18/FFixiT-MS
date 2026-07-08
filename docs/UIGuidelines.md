@@ -6,13 +6,13 @@ FixiT Management System (FFixiT-MS)
 
 ## Document Information
 
-|-------------|-----------------------|
-| Version | 0.1 |
-| Author | Muhammad Irfan Syafiq |
-| Project | FFixiT-MS |
-| Last Update | 2026-07-08 |
-| Status | Draft |
-|-------------|-----------------------|
+| Item        | Value                 |
+| ----------- | --------------------- |
+| Version     | 0.1                   |
+| Author      | Muhammad Irfan Syafiq |
+| Project     | FFixiT-MS             |
+| Last Update | 2026-07-09            |
+| Status      | Active                |
 
 ---
 
@@ -205,3 +205,13 @@ Pesan kesalahan harus:
 # Goal
 
 UI FFixiT-MS harus sederhana, profesional, cepat dipahami, dan nyaman digunakan dalam operasional toko komputer sehari-hari.
+
+Desktop First
+
+Minimum Resolution
+
+1366 x 768
+
+Optimized Resolution
+
+1920 x 1080

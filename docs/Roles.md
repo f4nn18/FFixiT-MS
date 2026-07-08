@@ -6,13 +6,13 @@ FFixiT Management System (FFixiT-MS)
 
 \## Document Information
 
-|-------------|-----------------------|
-| Version | 0.1 |
-| Author | Muhammad Irfan Syafiq |
-| Project | FFixiT-MS |
-| Last Update | 2026-07-08 |
-| Status | Draft |
-|-------------|-----------------------|
+| Item        | Value                 |
+| ----------- | --------------------- |
+| Version     | 0.1                   |
+| Author      | Muhammad Irfan Syafiq |
+| Project     | FFixiT-MS             |
+| Last Update | 2026-07-09            |
+| Status      | Active                |
 
 ---
 
@@ -70,7 +70,11 @@ IT merupakan Super Administrator yang memiliki akses penuh terhadap sistem.
 
 ### Restrictions
 
-Tidak memiliki batasan akses.
+IT memiliki akses penuh terhadap seluruh modul.
+
+Seluruh aktivitas IT tetap dicatat pada Audit Log.
+
+Audit Log bersifat immutable sehingga tindakan IT tetap dapat diaudit.
 
 \---
 

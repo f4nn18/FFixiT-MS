@@ -6,13 +6,13 @@ FixiT Management System (FFixiT-MS)
 
 \## Document Information
 
-|-------------|-----------------------|
-| Version | 0.1 |
-| Author | Muhammad Irfan Syafiq |
-| Project | FFixiT-MS |
-| Last Update | 2026-07-08 |
-| Status | Draft |
-|-------------|-----------------------|
+| Item        | Value                 |
+| ----------- | --------------------- |
+| Version     | 0.1                   |
+| Author      | Muhammad Irfan Syafiq |
+| Project     | FFixiT-MS             |
+| Last Update | 2026-07-09            |
+| Status      | Active                |
 
 \---
 
@@ -105,6 +105,18 @@ Status
 In Progress
 
 ```
+
+\---
+
+\## v0.15
+
+UI Prototype
+
+Wireframe
+
+Bootstrap Prototype
+
+Navigation Review
 
 \---
 

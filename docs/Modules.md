@@ -6,13 +6,13 @@ FFixiT Management System (FFixiT-MS)
 
 \## Document Information
 
-|-------------|-----------------------|
-| Version | 0.1 |
-| Author | Muhammad Irfan Syafiq |
-| Project | FFixiT-MS |
-| Last Update | 2026-07-08 |
-| Status | Draft |
-|-------------|-----------------------|
+| Item        | Value                 |
+| ----------- | --------------------- |
+| Version     | 0.1                   |
+| Author      | Muhammad Irfan Syafiq |
+| Project     | FFixiT-MS             |
+| Last Update | 2026-07-09            |
+| Status      | Active                |
 
 \---
 
@@ -126,7 +126,7 @@ Mengelola seluruh proses service mulai dari penerimaan perangkat hingga selesai.
 
 \- Finish Service
 
-\- Generate Service Invoice
+\- Mark as Ready for Invoice
 
 \- Warranty History
 

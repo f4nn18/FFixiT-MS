@@ -6,13 +6,13 @@ FFixiT Management System (FFixiT-MS)
 
 \## Document Information
 
-|-------------|-----------------------|
-| Version | 0.1 |
-| Author | Muhammad Irfan Syafiq |
-| Project | FFixiT-MS |
-| Last Update | 2026-07-08 |
-| Status | Draft |
-|-------------|-----------------------|
+| Item        | Value                 |
+| ----------- | --------------------- |
+| Version     | 0.1                   |
+| Author      | Muhammad Irfan Syafiq |
+| Project     | FFixiT-MS             |
+| Last Update | 2026-07-09            |
+| Status      | Active                |
 
 \---
 
@@ -548,53 +548,35 @@ Apabila customer melakukan klaim garansi:
 
 ```````````````````````````````````````````````````
 
-&#x20; Waiting Technician
+Waiting Technician
 
-&#x20;         │
+↓
 
-&#x20;         ▼
+Diagnosis
 
-&#x20;     Diagnosis
-
-&#x20;         │
-
-&#x20;         ▼
+↓
 
 Waiting Customer Approval
 
-&#x20;         │
+↓
 
-&#x20;         ├───────────────► Cancelled
+In Progress
 
-&#x20;         │
+↓
 
-&#x20;         ▼
+Finished
 
-&#x20;    In Progress
+↓
 
-&#x20;         │
+Waiting Payment
 
-&#x20;         ▼
+↓
 
-&#x20;     Finished
+Paid
 
-&#x20;         │
+↓
 
-&#x20;         ▼
-
-&#x20;  Waiting Invoice
-
-&#x20;         │
-
-&#x20;         ▼
-
-&#x20;        Paid
-
-&#x20;         │
-
-&#x20;         ▼
-
-&#x20;       Closed
+Closed
 
 ``````````````````````````````````````````````````
 

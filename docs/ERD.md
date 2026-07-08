@@ -6,13 +6,13 @@ FixiT Management System (FFixiT-MS)
 
 ## Document Information
 
-|-------------|-----------------------|
-| Version | 0.1 |
-| Author | Muhammad Irfan Syafiq |
-| Project | FFixiT-MS |
-| Last Update | 2026-07-08 |
-| Status | Draft |
-|-------------|-----------------------|
+| Item        | Value                 |
+| ----------- | --------------------- |
+| Version     | 0.1                   |
+| Author      | Muhammad Irfan Syafiq |
+| Project     | FFixiT-MS             |
+| Last Update | 2026-07-09            |
+| Status      | Active                |
 
 \---
 
@@ -364,21 +364,27 @@ updated_at
 
 ---
 
-\# Notes
+# Notes
 
-Beberapa tabel kemungkinan akan ditambahkan selama proses pengembangan apabila ditemukan kebutuhan bisnis baru.
+ERD ini menjadi acuan utama selama pengembangan FFixiT-MS.
 
-Contoh:\- notifications
+Penambahan, penghapusan, atau perubahan entity hanya dapat dilakukan apabila terdapat perubahan pada Business Flow, Modules, atau kebutuhan bisnis yang telah disetujui.
 
-\- device_brands
+Contoh kemungkinan entity pada versi berikutnya:
 
-\- device_models
+- notifications
+- device_brands
+- device_models
+- service_checklists
+- payment_methods
+- warranty_claims
 
-\- service_checklists
+Seluruh perubahan wajib memperhatikan konsistensi terhadap:
 
-\- payment_methods
-
-\- warranty_claims
+- BusinessFlow.md
+- Modules.md
+- Roles.md
+- AIInstructions.md
 
 Penambahan entity harus tetap mengikuti Business Flow dan Module yang telah ditetapkan sebelumnya.
 
@@ -388,4 +394,17 @@ Penambahan entity harus tetap mengikuti Business Flow dan Module yang telah dite
 
 Database FFixiT-MS dirancang menggunakan pendekatan modular sehingga setiap modul memiliki entity yang terpisah namun saling terhubung melalui relasi.
 
-Dokumen ini menjadi acuan utama dalam pembuatan Migration, Model Eloquent, serta Diagram ERD pada tahap implementasi.
+# Summary
+
+Database FFixiT-MS dirancang menggunakan pendekatan modular sehingga setiap modul memiliki entity yang terpisah namun saling terhubung melalui relasi.
+
+Dokumen ini menjadi acuan utama dalam pembuatan:
+
+- Laravel Migration
+- Eloquent Model
+- Database Seeder
+- Factory
+- Foreign Key Relationship
+- Business Logic yang berkaitan dengan database
+
+Seluruh implementasi database harus tetap konsisten dengan BusinessFlow.md, Modules.md, dan AIInstructions.md.
