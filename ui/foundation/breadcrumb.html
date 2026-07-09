@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FFixiT-MS | Breadcrumb Foundation</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #0d6efd;
+        --primary-dark: #0a58ca;
+        --secondary: #6c757d;
+        --success: #198754;
+        --warning: #ffc107;
+        --danger: #dc3545;
+        --info: #0dcaf0;
+        --bg: #f8f9fa;
+        --surface: #ffffff;
+        --text: #212529;
+        --muted: #6c757d;
+        --border: #dee2e6;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      }
+      .card {
+        border: 1px solid var(--border);
+        box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+      }
+      .text-muted {
+        color: var(--muted) !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container py-4">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#" class="text-decoration-none">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="#" class="text-decoration-none">Service Ticket</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="#" class="text-decoration-none">List</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Detail</li>
+        </ol>
+      </nav>
+      <div class="card rounded-4 border-0">
+        <div class="card-body p-4">
+          <h1 class="h4 fw-bold mb-2">Breadcrumb Foundation</h1>
+          <p class="text-muted mb-0">
+            Use breadcrumb navigation to keep users aware of their location
+            within the application.
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
