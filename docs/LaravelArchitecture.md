@@ -6,12 +6,12 @@ FFixiT Management System (FFixiT-MS)
 
 ## Document Information
 
-| Item        | Value                                                  |
-| ----------- | ------------------------------------------------------- |
-| Version     | 1.0                                                      |
-| Author      | AI Lead Laravel Architect (FFixiT-MS Project)            |
-| Project     | FFixiT-MS                                                |
-| Status      | Draft — Ready for Review                                 |
+| Item    | Value                                         |
+| ------- | --------------------------------------------- |
+| Version | 1.0                                           |
+| Author  | AI Lead Laravel Architect (FFixiT-MS Project) |
+| Project | FFixiT-MS                                     |
+| Status  | Draft — Ready for Review                      |
 
 This document translates the FFixiT-MS documentation set (`README.md`, `BusinessFlow.md`, `Roles.md`, `Modules.md`, `Roadmap.md`, `ERD.md`, `AIInstructions.md`, `CodingStandards.md`, `UIGuidelines.md`, `DesignSystem.md`, `ComponentLibrary.md`, `UIFlow.md`, `ScreenSpecification.md`) into a concrete Laravel 12 architecture. It does not introduce new business rules, roles, modules, or database entities — every decision below traces back to an existing document, or to a Sprint 0 decision already approved by the project owner (2026-07-10), which this document treats as binding precedent.
 
@@ -135,14 +135,14 @@ FFixiT-MS strictly follows Laravel's MVC, extended with a Service layer (see Sec
 
 ### 2.1 Layer Responsibilities
 
-| Layer | Responsibility | Must NOT contain |
-|---|---|---|
-| **Route** | Maps an HTTP verb + URI to a Controller action, with middleware applied. | Business logic, validation logic. |
-| **Controller** | Receives the request (already validated by a Form Request), calls exactly one Service method, and returns a View or Redirect. | Query building, business rules, direct Eloquent writes beyond trivial reads for a View. |
-| **Form Request** | Validates and authorizes input, per `AIInstructions.md` Backend Rules ("Gunakan Form Request Validation jika diperlukan"). | Business logic beyond validation/authorization. |
-| **Service** | Owns business logic: orchestrates one or more Model operations, enforces `BusinessFlow.md` rules, wraps multi-step writes in a DB transaction, and is the only place status transitions (e.g. Ticket status) happen. | HTTP concerns (Request/Response objects), View rendering. |
-| **Model (Eloquent)** | Table mapping, relationships (`ERD.md`), casts/enums, accessors/scopes, and model-level constants. | Cross-entity business rules, HTTP or Service concerns. |
-| **View (Blade)** | Presentation only, per `ScreenSpecification.md` and `DesignSystem.md`. | Query logic (a View may loop over data already fully prepared by the Controller/Service — it must not call the Service or Model to fetch additional data itself). |
+| Layer                | Responsibility                                                                                                                                                                                                       | Must NOT contain                                                                                                                                                  |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Route**            | Maps an HTTP verb + URI to a Controller action, with middleware applied.                                                                                                                                             | Business logic, validation logic.                                                                                                                                 |
+| **Controller**       | Receives the request (already validated by a Form Request), calls exactly one Service method, and returns a View or Redirect.                                                                                        | Query building, business rules, direct Eloquent writes beyond trivial reads for a View.                                                                           |
+| **Form Request**     | Validates and authorizes input, per `AIInstructions.md` Backend Rules ("Gunakan Form Request Validation jika diperlukan").                                                                                           | Business logic beyond validation/authorization.                                                                                                                   |
+| **Service**          | Owns business logic: orchestrates one or more Model operations, enforces `BusinessFlow.md` rules, wraps multi-step writes in a DB transaction, and is the only place status transitions (e.g. Ticket status) happen. | HTTP concerns (Request/Response objects), View rendering.                                                                                                         |
+| **Model (Eloquent)** | Table mapping, relationships (`ERD.md`), casts/enums, accessors/scopes, and model-level constants.                                                                                                                   | Cross-entity business rules, HTTP or Service concerns.                                                                                                            |
+| **View (Blade)**     | Presentation only, per `ScreenSpecification.md` and `DesignSystem.md`.                                                                                                                                               | Query logic (a View may loop over data already fully prepared by the Controller/Service — it must not call the Service or Model to fetch additional data itself). |
 
 ### 2.2 Data Flow (typical write action, e.g. "Finish Service")
 
@@ -160,7 +160,7 @@ Route (tickets.finish.store)
   → redirect()->route('tickets.show', $ticket) with Success Alert
 ```
 
-Controllers never call two Services' *domain* methods to fake a transaction boundary — if an action spans modules (e.g. Finish Service also touches Inventory), the *owning* Service (`TicketService`) calls the *other* Service's method (`InventoryService::deductStockForTicket()`), and the transaction is opened once, at the top (owning Service).
+Controllers never call two Services' _domain_ methods to fake a transaction boundary — if an action spans modules (e.g. Finish Service also touches Inventory), the _owning_ Service (`TicketService`) calls the _other_ Service's method (`InventoryService::deductStockForTicket()`), and the transaction is opened once, at the top (owning Service).
 
 ### 2.3 Models (per `ERD.md`, singular per `CodingStandards.md`)
 
@@ -182,23 +182,24 @@ No `Role` model exists (see Binding Decisions §1).
 
 ### 3.2 File Map
 
-| File | Contains |
-|---|---|
-| `routes/web.php` | `Route::redirect('/', '/dashboard')`, the `dashboard` route, and `require` statements for `auth.php` and every file in `modules/`. |
-| `routes/auth.php` | Login, Forgot Password, Reset Password, Logout (Sprint 0 — already implemented). |
-| `routes/modules/customers.php` | Customer List/Form/Detail (v0.4). |
-| `routes/modules/tickets.php` | Ticket List/Create/Detail + all sub-flows: diagnosis, approval, progress, evidence, sparepart-requests, finish, cancellation, warranty-claim, invoice, print (v0.5). |
-| `routes/modules/inventory.php` | Product, Category, Stock In, Stock Opname, Stock Adjustment, Stock Movement History (v0.6). |
-| `routes/modules/suppliers.php` | Supplier List/Form/Detail (v0.6). |
-| `routes/modules/sales.php` | POS Transaction, Sales History, Sales Invoice Detail, Print Invoice (v0.7). |
-| `routes/modules/expenses.php` | Expense List/Form, Expense Category (v0.8). |
-| `routes/modules/monitoring.php` | Monitoring Overview + 5 read-only report pages (v0.9). |
-| `routes/modules/user-management.php` | User, Employee, Role & Permission (v0.2). |
-| `routes/modules/audit-log.php` | Audit Log List/Detail (v1.0). |
+| File                                 | Contains                                                                                                                                                             |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `routes/web.php`                     | `Route::redirect('/', '/dashboard')`, the `dashboard` route, and `require` statements for `auth.php` and every file in `modules/`.                                   |
+| `routes/auth.php`                    | Login, Forgot Password, Reset Password, Logout (Sprint 0 — already implemented).                                                                                     |
+| `routes/modules/customers.php`       | Customer List/Form/Detail (v0.4).                                                                                                                                    |
+| `routes/modules/tickets.php`         | Ticket List/Create/Detail + all sub-flows: diagnosis, approval, progress, evidence, sparepart-requests, finish, cancellation, warranty-claim, invoice, print (v0.5). |
+| `routes/modules/inventory.php`       | Product, Category, Stock In, Stock Opname, Stock Adjustment, Stock Movement History (v0.6).                                                                          |
+| `routes/modules/suppliers.php`       | Supplier List/Form/Detail (v0.6).                                                                                                                                    |
+| `routes/modules/sales.php`           | POS Transaction, Sales History, Sales Invoice Detail, Print Invoice (v0.7).                                                                                          |
+| `routes/modules/expenses.php`        | Expense List/Form, Expense Category (v0.8).                                                                                                                          |
+| `routes/modules/monitoring.php`      | Monitoring Overview + 5 read-only report pages (v0.9).                                                                                                               |
+| `routes/modules/user-management.php` | User, Employee, Role & Permission (v0.2).                                                                                                                            |
+| `routes/modules/audit-log.php`       | Audit Log List/Detail (v1.0).                                                                                                                                        |
 
 ### 3.3 Route Group Skeleton (descriptive, not code)
 
 Each module file wraps its routes in a group with:
+
 - URI prefix matching the module (e.g. `tickets/...`),
 - `auth` middleware,
 - `role:<roles allowed per ScreenSpecification.md>` middleware, applied per sub-group when a sub-action's allowed roles differ from the module's general list (e.g. within `tickets.php`, the Cancellation review routes are further restricted to `role:it` even though the module overall allows `customer_service,it`),
@@ -206,7 +207,7 @@ Each module file wraps its routes in a group with:
 
 ### 3.4 Route Existence vs. Sidebar
 
-Per Binding Decision §5, the Sidebar (Sprint 0) already lists every route name it *will* use once a module ships. When a module's route file is added in its sprint, only two things change in `app/View/Components/Sidebar.php`: the corresponding item's `enabled` flag flips to `true` and its `route` key is filled in — the menu structure itself does not change.
+Per Binding Decision §5, the Sidebar (Sprint 0) already lists every route name it _will_ use once a module ships. When a module's route file is added in its sprint, only two things change in `app/View/Components/Sidebar.php`: the corresponding item's `enabled` flag flips to `true` and its `route` key is filled in — the menu structure itself does not change.
 
 ---
 
@@ -223,10 +224,10 @@ Per Binding Decision §5, the Sidebar (Sprint 0) already lists every route name 
 
 Per `ComponentLibrary.md`, components fall into two kinds, and Sprint 0 already established the pattern for both:
 
-| Kind | Where | Example |
-|---|---|---|
-| **Anonymous component** (no PHP class, pure Blade + `@props`) | `resources/views/components/*.blade.php` | Button, Alert, Badge, Modal, Empty State, Page Header |
-| **Class-based component** (needs PHP logic to prepare data) | `app/View/Components/*.php` + matching Blade view | Sidebar (role-based menu building) |
+| Kind                                                          | Where                                             | Example                                               |
+| ------------------------------------------------------------- | ------------------------------------------------- | ----------------------------------------------------- |
+| **Anonymous component** (no PHP class, pure Blade + `@props`) | `resources/views/components/*.blade.php`          | Button, Alert, Badge, Modal, Empty State, Page Header |
+| **Class-based component** (needs PHP logic to prepare data)   | `app/View/Components/*.php` + matching Blade view | Sidebar (role-based menu building)                    |
 
 A component only gets a backing PHP class when it needs computed data beyond what `@props` + simple Blade conditionals can express (mirroring why Sidebar needed one and Button did not). Examples expected to need a class in later sprints: `TicketStatusTimeline` (needs to compute which steps are complete/current/upcoming), `EvidenceGallery` (needs to group photos by Before/After).
 
@@ -244,10 +245,10 @@ Print-optimized views (`ScreenSpecification.md` 4.13, 7.4) live in `resources/vi
 
 FFixiT-MS uses a small, explicit middleware set — no middleware groups beyond Laravel's own `web` group, per Binding Decision §2 (no RBAC package) and `AIInstructions.md` ("Menambahkan library pihak ketiga tanpa alasan yang jelas" is disallowed).
 
-| Middleware | Registered as | Purpose |
-|---|---|---|
-| `auth` (Laravel default) | `auth` | Blocks unauthenticated access; redirects to `login`. |
-| `guest` (Laravel default) | `guest` | Blocks authenticated users from auth pages (Login, Forgot/Reset Password). |
+| Middleware                     | Registered as              | Purpose                                                                                                                                                                        |
+| ------------------------------ | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `auth` (Laravel default)       | `auth`                     | Blocks unauthenticated access; redirects to `login`.                                                                                                                           |
+| `guest` (Laravel default)      | `guest`                    | Blocks authenticated users from auth pages (Login, Forgot/Reset Password).                                                                                                     |
 | `EnsureUserHasRole` (Sprint 0) | `role:<role1>,<role2>,...` | Compares `$request->user()->role` against the roles listed in the route definition; also blocks deactivated accounts (`is_active = false`), per `ScreenSpecification.md` 10.1. |
 
 ### 5.1 Application Order
@@ -272,15 +273,15 @@ Laravel's built-in session-based guard (`web`), scaffolded via **Laravel Breeze 
 
 ### 6.2 What Exists
 
-| Feature | Status | Spec Reference |
-|---|---|---|
-| Login | Implemented (Sprint 0) | 1.1 |
-| Logout | Implemented (Sprint 0) | 1.5 |
-| Forgot / Reset Password | Implemented (Sprint 0) | 1.2 |
-| Remember Me | Implemented (Sprint 0, `remember` checkbox) | 1.1 |
-| Registration | **Not implemented — by design** | Accounts are created by IT (v0.2 User Management) |
-| Email Verification | **Not implemented** | Not a documented screen |
-| Two-Factor Auth | **Not implemented** | Not a documented screen; would require new approval |
+| Feature                 | Status                                      | Spec Reference                                      |
+| ----------------------- | ------------------------------------------- | --------------------------------------------------- |
+| Login                   | Implemented (Sprint 0)                      | 1.1                                                 |
+| Logout                  | Implemented (Sprint 0)                      | 1.5                                                 |
+| Forgot / Reset Password | Implemented (Sprint 0)                      | 1.2                                                 |
+| Remember Me             | Implemented (Sprint 0, `remember` checkbox) | 1.1                                                 |
+| Registration            | **Not implemented — by design**             | Accounts are created by IT (v0.2 User Management)   |
+| Email Verification      | **Not implemented**                         | Not a documented screen                             |
+| Two-Factor Auth         | **Not implemented**                         | Not a documented screen; would require new approval |
 
 ### 6.3 Session Configuration
 
@@ -306,7 +307,7 @@ RBAC in FFixiT-MS is enforced at three layers, deliberately overlapping (defense
 
 1. **Route middleware** (`role:...`) — blocks the request before any Controller code runs. This is the primary, authoritative gate.
 2. **Blade conditionals** (`@if (auth()->user()->hasRole(UserRole::IT))` or `hasAnyRole([...])`) — hides buttons/actions a role cannot use, per `ScreenSpecification.md`'s repeated rule "buttons the current role is not authorized to use are hidden, not disabled" (see Global Conventions). This is a UX concern, not a security boundary by itself.
-3. **Service-layer guard clauses** — for actions where the *route* is shared across roles but the *allowed transition* differs by role (e.g. Ticket Cancellation: CS can *request*, only IT can *approve* — both hit `tickets.cancellation.*` routes, but `TicketService` checks the acting user's role before performing an approval).
+3. **Service-layer guard clauses** — for actions where the _route_ is shared across roles but the _allowed transition_ differs by role (e.g. Ticket Cancellation: CS can _request_, only IT can _approve_ — both hit `tickets.cancellation.*` routes, but `TicketService` checks the acting user's role before performing an approval).
 
 Layer 1 is mandatory on every route. Layers 2 and 3 are added as each module is implemented; a module PR that only implements Layer 1 is incomplete.
 
@@ -326,26 +327,27 @@ Per Binding Decision §2 and `AIInstructions.md` ("Menambah role baru" is disall
 
 Per `CodingStandards.md` ("Use Service Classes when business logic becomes complex. Keep Controllers thin."), every module with more than trivial CRUD gets a dedicated Service:
 
-| Service | Owns |
-|---|---|
-| `DashboardService` | Sprint 0 shell; from v0.3 onward, assembles each role's widget data by calling into other modules' Services (read-only). |
-| `CustomerService` | Customer CRUD + delete-guard (blocks delete if Ticket/Sales history exists, per `ScreenSpecification.md` 3.1 Business Rules). |
-| `TicketService` | The full Service Flow state machine (`BusinessFlow.md` Section A): creation, diagnosis, approval recording, progress, finish, invoicing, status transitions. This is the largest and most critical Service in the system. |
-| `TicketCancellationService` | Cancellation request + IT approval/denial sub-flow (kept separate from `TicketService` because its authorization shape — CS requests, IT decides — is distinct enough to warrant isolation, while still being called *by* `TicketService` for the resulting status change). |
-| `TicketWarrantyService` | Warranty claim creation (new linked ticket), per `BusinessFlow.md` Garansi rule. |
-| `InventoryService` | Product/Category CRUD, Stock In, Stock Opname, Stock Adjustment, and the single place `StockMovement` rows are ever written (see 8.3). |
-| `SparepartRequestService` | Request creation (from `TicketService`) and fulfillment (from Admin Gudang), per `ScreenSpecification.md` 4.8 / 5.9. |
-| `SupplierService` | Supplier CRUD. |
-| `SalesService` | POS transaction creation, void/refund, per `BusinessFlow.md` Direct Sales Flow. |
-| `ExpenseService` | Expense + Expense Category CRUD. |
-| `MonitoringService` | Read-only aggregation queries for the 5 report pages (v0.9) — no writes. |
-| `UserManagementService` | User CRUD, Reset Password, Activate/Deactivate. |
-| `EmployeeService` | Employee CRUD. |
-| `AuditLogService` | Write-side: a single `record()` method called by other Services (see 8.4). Read-side: filtering/search for the Audit Log List/Detail screens. |
+| Service                     | Owns                                                                                                                                                                                                                                                                        |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DashboardService`          | Sprint 0 shell; from v0.3 onward, assembles each role's widget data by calling into other modules' Services (read-only).                                                                                                                                                    |
+| `CustomerService`           | Customer CRUD + delete-guard (blocks delete if Ticket/Sales history exists, per `ScreenSpecification.md` 3.1 Business Rules).                                                                                                                                               |
+| `TicketService`             | The full Service Flow state machine (`BusinessFlow.md` Section A): creation, diagnosis, approval recording, progress, finish, invoicing, status transitions. This is the largest and most critical Service in the system.                                                   |
+| `TicketCancellationService` | Cancellation request + IT approval/denial sub-flow (kept separate from `TicketService` because its authorization shape — CS requests, IT decides — is distinct enough to warrant isolation, while still being called _by_ `TicketService` for the resulting status change). |
+| `TicketWarrantyService`     | Warranty claim creation (new linked ticket), per `BusinessFlow.md` Garansi rule.                                                                                                                                                                                            |
+| `InventoryService`          | Product/Category CRUD, Stock In, Stock Opname, Stock Adjustment, and the single place `StockMovement` rows are ever written (see 8.3).                                                                                                                                      |
+| `SparepartRequestService`   | Request creation (from `TicketService`) and fulfillment (from Admin Gudang), per `ScreenSpecification.md` 4.8 / 5.9.                                                                                                                                                        |
+| `SupplierService`           | Supplier CRUD.                                                                                                                                                                                                                                                              |
+| `SalesService`              | POS transaction creation, void/refund, per `BusinessFlow.md` Direct Sales Flow.                                                                                                                                                                                             |
+| `ExpenseService`            | Expense + Expense Category CRUD.                                                                                                                                                                                                                                            |
+| `MonitoringService`         | Read-only aggregation queries for the 5 report pages (v0.9) — no writes.                                                                                                                                                                                                    |
+| `UserManagementService`     | User CRUD, Reset Password, Activate/Deactivate.                                                                                                                                                                                                                             |
+| `EmployeeService`           | Employee CRUD.                                                                                                                                                                                                                                                              |
+| `AuditLogService`           | Write-side: a single `record()` method called by other Services (see 8.4). Read-side: filtering/search for the Audit Log List/Detail screens.                                                                                                                               |
 
 ### 8.2 Service Method Shape
 
 Every Service method that writes data:
+
 - Accepts either a Model instance (for updates) or plain validated array data (from the Form Request), never the raw `Request` object — this keeps Services testable without HTTP.
 - Wraps multi-step writes in `DB::transaction()`.
 - Returns the affected Model (or a small result object) — never a Response/Redirect.
@@ -369,11 +371,11 @@ Per `BusinessFlow.md` Audit Flow, every Create/Update/Delete/Cancel/Reassign/Sto
 
 FFixiT-MS has three documented upload surfaces, all using Laravel's standard `Illuminate\Http\UploadedFile` + `Storage` facade — no third-party media library, per `AIInstructions.md`'s "no unjustified third-party library" rule:
 
-| Upload | Spec Reference | Constraints (from ScreenSpecification.md) |
-|---|---|---|
-| Ticket Evidence (Before/After photos) | 4.4, 4.7, 4.9 | Multiple images, JPG/PNG/WEBP only, required at least 1 per stage. |
-| Ticket Cancellation Evidence | 4.10 | Multiple files (images, audio/video, or documents), required at least 1. |
-| Expense Receipt Attachment | 8.2 | Single image or PDF, optional. |
+| Upload                                | Spec Reference | Constraints (from ScreenSpecification.md)                                |
+| ------------------------------------- | -------------- | ------------------------------------------------------------------------ |
+| Ticket Evidence (Before/After photos) | 4.4, 4.7, 4.9  | Multiple images, JPG/PNG/WEBP only, required at least 1 per stage.       |
+| Ticket Cancellation Evidence          | 4.10           | Multiple files (images, audio/video, or documents), required at least 1. |
+| Expense Receipt Attachment            | 8.2            | Single image or PDF, optional.                                           |
 
 ### 9.1 Validation
 
@@ -420,33 +422,33 @@ storage/app/public/
 
 Migrations must run in dependency order — a table with a foreign key cannot migrate before the table it references. This order also mirrors, and is derived from, the module sequence in `Roadmap.md` (Foundation → Auth/User → Customer → Ticket → Inventory → Sales → Expense), so each sprint's migrations are a contiguous block.
 
-| # | Migration | Depends On | Roadmap Milestone |
-|---|---|---|---|
-| 1 | `users` (+ `password_reset_tokens`, `sessions`) | — | v0.1 (done, Sprint 0) |
-| 2 | `employees` | — | v0.2 |
-| 3 | `customers` | — | v0.4 |
-| 4 | `expense_categories` | — | v0.8 (migrated early since it has no dependencies; see note below) |
-| 5 | `categories` | — | v0.6 |
-| 6 | `suppliers` | — | v0.6 |
-| 7 | `products` | `categories` | v0.6 |
-| 8 | `tickets` | `customers`, `employees` (technician, nullable until assigned) | v0.5 |
-| 9 | `ticket_progresses` | `tickets`, `employees` | v0.5 |
-| 10 | `ticket_photos` | `tickets` | v0.5 |
-| 11 | `ticket_parts` | `tickets`, `products` | v0.5 |
-| 12 | `ticket_warranties` | `tickets` | v0.5 |
-| 13 | `ticket_cancellations` | `tickets`, `users` (requested_by, decided_by) | v0.5 |
-| 14 | `purchase_transactions` | `suppliers` | v0.6 |
-| 15 | `purchase_transaction_items` | `purchase_transactions`, `products` | v0.6 |
-| 16 | `stock_movements` | `products`, plus nullable polymorphic reference to source (`purchase_transactions` / `tickets` / `sales`) | v0.6 |
-| 17 | `sales` | `customers` (nullable — walk-in), `users` (cashier) | v0.7 |
-| 18 | `sale_items` | `sales`, `products` | v0.7 |
-| 19 | `operational_expenses` | `expense_categories`, `users` | v0.8 |
-| 20 | `audit_logs` | `users`, plus polymorphic reference to the affected record | v1.0 (see note below) |
+| #   | Migration                                       | Depends On                                                                                                | Roadmap Milestone                                                  |
+| --- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| 1   | `users` (+ `password_reset_tokens`, `sessions`) | —                                                                                                         | v0.1 (done, Sprint 0)                                              |
+| 2   | `employees`                                     | —                                                                                                         | v0.2                                                               |
+| 3   | `customers`                                     | —                                                                                                         | v0.4                                                               |
+| 4   | `expense_categories`                            | —                                                                                                         | v0.8 (migrated early since it has no dependencies; see note below) |
+| 5   | `categories`                                    | —                                                                                                         | v0.6                                                               |
+| 6   | `suppliers`                                     | —                                                                                                         | v0.6                                                               |
+| 7   | `products`                                      | `categories`                                                                                              | v0.6                                                               |
+| 8   | `tickets`                                       | `customers`, `employees` (technician, nullable until assigned)                                            | v0.5                                                               |
+| 9   | `ticket_progresses`                             | `tickets`, `employees`                                                                                    | v0.5                                                               |
+| 10  | `ticket_photos`                                 | `tickets`                                                                                                 | v0.5                                                               |
+| 11  | `ticket_parts`                                  | `tickets`, `products`                                                                                     | v0.5                                                               |
+| 12  | `ticket_warranties`                             | `tickets`                                                                                                 | v0.5                                                               |
+| 13  | `ticket_cancellations`                          | `tickets`, `users` (requested_by, decided_by)                                                             | v0.5                                                               |
+| 14  | `purchase_transactions`                         | `suppliers`                                                                                               | v0.6                                                               |
+| 15  | `purchase_transaction_items`                    | `purchase_transactions`, `products`                                                                       | v0.6                                                               |
+| 16  | `stock_movements`                               | `products`, plus nullable polymorphic reference to source (`purchase_transactions` / `tickets` / `sales`) | v0.6                                                               |
+| 17  | `sales`                                         | `customers` (nullable — walk-in), `users` (cashier)                                                       | v0.7                                                               |
+| 18  | `sale_items`                                    | `sales`, `products`                                                                                       | v0.7                                                               |
+| 19  | `operational_expenses`                          | `expense_categories`, `users`                                                                             | v0.8                                                               |
+| 20  | `audit_logs`                                    | `users`, plus polymorphic reference to the affected record                                                | v1.0 (see note below)                                              |
 
 **Notes:**
 
-- **`expense_categories` is migrated early (step 4)** even though Operational Expense is v0.8, because it has zero dependencies and costs nothing to have available sooner; the *table* being migrated early does not mean the *module* is implemented early — no Controller/Service/View for Expense exists until v0.8. This is purely a migration-ordering convenience, not a scope change.
-- **`audit_logs` is migrated at v1.0 per the literal Roadmap position**, but since `AuditLogService::record()` (Section 8.4) is called by every other Service from v0.2 onward, the `audit_logs` table must actually exist much earlier. **This is an Open Item requiring confirmation**: either (a) move the `audit_logs` migration to immediately after `users` (step 2) so audit recording can start from v0.2 as `BusinessFlow.md`'s Audit Flow implies ("mencatat aktivitas penting" — login/logout already happens in v0.2), or (b) confirm that Audit Log recording itself is intentionally deferred to v1.0 along with its UI. Recommendation: option (a). This does not change `ERD.md` (the table already exists there) or `Roadmap.md` (the *screen* still ships at v1.0) — it only moves *when the table is migrated*, which is an implementation-order detail, not a documentation change, but is flagged here per `AIInstructions.md`'s "ask before deciding" rule since it affects delivery sequencing.
+- **`expense_categories` is migrated early (step 4)** even though Operational Expense is v0.8, because it has zero dependencies and costs nothing to have available sooner; the _table_ being migrated early does not mean the _module_ is implemented early — no Controller/Service/View for Expense exists until v0.8. This is purely a migration-ordering convenience, not a scope change.
+- **`audit_logs` is migrated at v1.0 per the literal Roadmap position**, but since `AuditLogService::record()` (Section 8.4) is called by every other Service from v0.2 onward, the `audit_logs` table must actually exist much earlier. **This is an Open Item requiring confirmation**: either (a) move the `audit_logs` migration to immediately after `users` (step 2) so audit recording can start from v0.2 as `BusinessFlow.md`'s Audit Flow implies ("mencatat aktivitas penting" — login/logout already happens in v0.2), or (b) confirm that Audit Log recording itself is intentionally deferred to v1.0 along with its UI. Recommendation: option (a). This does not change `ERD.md` (the table already exists there) or `Roadmap.md` (the _screen_ still ships at v1.0) — it only moves _when the table is migrated_, which is an implementation-order detail, not a documentation change, but is flagged here per `AIInstructions.md`'s "ask before deciding" rule since it affects delivery sequencing.
 - **Sparepart Request** (`ScreenSpecification.md` 4.8/5.9) has no dedicated table in `ERD.md`. Per that document's own Appendix, this is flagged as an Open Item: the recommended approach is to extend `ticket_parts` with a `status` column (`requested` / `fulfilled`) and a nullable `requested_at`/`fulfilled_at` pair, rather than introducing a new table, since `AIInstructions.md` forbids new tables without approval. This should be confirmed before the v0.5/v0.6 migrations are written.
 
 ---
@@ -457,23 +459,23 @@ Seeders follow the same dependency order as migrations, split into two categorie
 
 ### 12.1 Foundation Seeders (run in every environment, including production first-deploy)
 
-| # | Seeder | Purpose |
-|---|---|---|
-| 1 | `UserSeeder` | One account per role for initial IT access (Sprint 0 already seeds test accounts for local/dev only — production seeding should create exactly one real IT account, not the five test accounts, per an environment check, e.g. `app()->environment('local')`). |
-| 2 | `ExpenseCategorySeeder` | Standard categories implied by `BusinessFlow.md`/`Roadmap.md` (Electricity, Water, Internet, Rent, Operational Equipment) — reference data, not demo data. |
-| 3 | `CategorySeeder` | A starter set of product categories (e.g. Sparepart, Accessories, Peripherals) — reference data, to be confirmed with the project owner before the v0.6 sprint, since `Modules.md`/`ERD.md` do not enumerate specific category names. |
+| #   | Seeder                  | Purpose                                                                                                                                                                                                                                                        |
+| --- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | `UserSeeder`            | One account per role for initial IT access (Sprint 0 already seeds test accounts for local/dev only — production seeding should create exactly one real IT account, not the five test accounts, per an environment check, e.g. `app()->environment('local')`). |
+| 2   | `ExpenseCategorySeeder` | Standard categories implied by `BusinessFlow.md`/`Roadmap.md` (Electricity, Water, Internet, Rent, Operational Equipment) — reference data, not demo data.                                                                                                     |
+| 3   | `CategorySeeder`        | A starter set of product categories (e.g. Sparepart, Accessories, Peripherals) — reference data, to be confirmed with the project owner before the v0.6 sprint, since `Modules.md`/`ERD.md` do not enumerate specific category names.                          |
 
 ### 12.2 Demo/Development Seeders (local & staging only, never production)
 
-| # | Seeder | Purpose |
-|---|---|---|
-| 4 | `EmployeeSeeder` | Sample employees, one per role, for exercising Ticket assignment. |
-| 5 | `CustomerSeeder` | Sample walk-in customers. |
-| 6 | `SupplierSeeder` | Sample suppliers. |
-| 7 | `ProductSeeder` | Sample products across seeded categories, with realistic stock levels (including some intentionally below minimum stock, to exercise the Low Stock Warning). |
-| 8 | `TicketSeeder` | Sample tickets across a spread of statuses (one per status value) so every Status Badge color and every Ticket Detail contextual action can be manually verified without manually walking a ticket through the whole flow. |
-| 9 | `SaleSeeder` | Sample POS transactions. |
-| 10 | `OperationalExpenseSeeder` | Sample expense entries across a few months, to exercise the Monitoring & Reports date-range filters. |
+| #   | Seeder                     | Purpose                                                                                                                                                                                                                    |
+| --- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 4   | `EmployeeSeeder`           | Sample employees, one per role, for exercising Ticket assignment.                                                                                                                                                          |
+| 5   | `CustomerSeeder`           | Sample walk-in customers.                                                                                                                                                                                                  |
+| 6   | `SupplierSeeder`           | Sample suppliers.                                                                                                                                                                                                          |
+| 7   | `ProductSeeder`            | Sample products across seeded categories, with realistic stock levels (including some intentionally below minimum stock, to exercise the Low Stock Warning).                                                               |
+| 8   | `TicketSeeder`             | Sample tickets across a spread of statuses (one per status value) so every Status Badge color and every Ticket Detail contextual action can be manually verified without manually walking a ticket through the whole flow. |
+| 9   | `SaleSeeder`               | Sample POS transactions.                                                                                                                                                                                                   |
+| 10  | `OperationalExpenseSeeder` | Sample expense entries across a few months, to exercise the Monitoring & Reports date-range filters.                                                                                                                       |
 
 `DatabaseSeeder` calls Section 12.1 unconditionally and Section 12.2 only when `app()->environment(['local', 'staging'])`, so `php artisan migrate --seed` is safe to run against production and only provisions real reference data plus the initial IT account.
 
@@ -485,17 +487,17 @@ Per `AIInstructions.md`'s Development Rules ("kode yang bersih dan mudah dibaca"
 
 ### 13.1 Test Types
 
-| Type | Location | Covers |
-|---|---|---|
+| Type              | Location                  | Covers                                                                                                                                                                                                                                                                                                                      |
+| ----------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Feature tests** | `tests/Feature/{Module}/` | HTTP-level: route access per role (both the "allowed" and "403" cases), form validation messages matching `ScreenSpecification.md` exactly, and the full happy-path flow through a Controller. This is the primary test type for FFixiT-MS, since almost all business value is expressed through HTTP-driven Service calls. |
-| **Unit tests** | `tests/Unit/Services/` | Service methods in isolation (e.g. `TicketService::startService()` throwing when approval hasn't been recorded; `InventoryService::deductStock()` throwing on insufficient stock). Used wherever a Service method has business-rule branches worth testing without the overhead of a full HTTP request. |
+| **Unit tests**    | `tests/Unit/Services/`    | Service methods in isolation (e.g. `TicketService::startService()` throwing when approval hasn't been recorded; `InventoryService::deductStock()` throwing on insufficient stock). Used wherever a Service method has business-rule branches worth testing without the overhead of a full HTTP request.                     |
 
 ### 13.2 What Every Module's Feature Test Suite Must Cover
 
 1. **RBAC**: for every role listed in `ScreenSpecification.md`'s Accessible Roles, assert the expected access (200/redirect for allowed roles, 403 for disallowed roles, per Section 7.2 Layer 1).
 2. **Validation**: for every Validation Message documented in `ScreenSpecification.md`, a test asserting that exact message appears when the corresponding invalid input is submitted.
 3. **Business Rules**: for every rule listed under a screen's Business Rules section, a test proving the rule is enforced (e.g. "Start Service is disabled until Customer Decision = Approved" → a test that attempts `startService()` without a recorded approval and asserts failure).
-4. **Status Transitions** (Ticket module especially): a test per transition in `BusinessFlow.md`'s Ticket Status flow, asserting the *only* valid next statuses are reachable and no status can be skipped.
+4. **Status Transitions** (Ticket module especially): a test per transition in `BusinessFlow.md`'s Ticket Status flow, asserting the _only_ valid next statuses are reachable and no status can be skipped.
 
 ### 13.3 Test Data
 
@@ -517,13 +519,13 @@ Per `Roadmap.md`'s "Git Version Control" principle and its per-feature workflow 
 
 ### 14.1 Branches
 
-| Branch | Purpose |
-|---|---|
-| `main` | Always deployable. Every merge to `main` corresponds to a completed Roadmap milestone (e.g. "v0.4 Customer Management done"). |
-| `develop` | Integration branch for the milestone currently in progress. Feature branches merge here first; `develop` merges to `main` only when the whole milestone's Scope/Features list is complete. |
-| `feature/{module}-{short-description}` | One branch per unit of work within a milestone, e.g. `feature/customer-list`, `feature/ticket-diagnosis-form`. Branches from `develop`, merges back to `develop` via Pull Request. |
-| `fix/{short-description}` | Bug fixes outside an active feature branch, branched from and merged to `develop` (or `main` directly for a production hotfix, then back-merged to `develop`). |
-| `docs/{short-description}` | Documentation-only changes (e.g. an approved edit to `docs/BusinessFlow.md`) — kept separate from `feature/*` so a documentation diff is never bundled with a code diff in the same review. |
+| Branch                                 | Purpose                                                                                                                                                                                     |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `main`                                 | Always deployable. Every merge to `main` corresponds to a completed Roadmap milestone (e.g. "v0.4 Customer Management done").                                                               |
+| `develop`                              | Integration branch for the milestone currently in progress. Feature branches merge here first; `develop` merges to `main` only when the whole milestone's Scope/Features list is complete.  |
+| `feature/{module}-{short-description}` | One branch per unit of work within a milestone, e.g. `feature/customer-list`, `feature/ticket-diagnosis-form`. Branches from `develop`, merges back to `develop` via Pull Request.          |
+| `fix/{short-description}`              | Bug fixes outside an active feature branch, branched from and merged to `develop` (or `main` directly for a production hotfix, then back-merged to `develop`).                              |
+| `docs/{short-description}`             | Documentation-only changes (e.g. an approved edit to `docs/BusinessFlow.md`) — kept separate from `feature/*` so a documentation diff is never bundled with a code diff in the same review. |
 
 ### 14.2 Rules
 
@@ -548,7 +550,7 @@ This section operationalizes `Roadmap.md`'s per-feature workflow into concrete s
 5. **Backend** — implement Migration → Model → Form Request → Service → Controller → Route, in that order (each layer depends on the one before it existing).
 6. **Frontend** — implement Blade view(s) using existing components from `resources/views/components/` wherever one already covers the need; only add a new component (Section 4.2) when the existing set genuinely doesn't fit.
 7. **Testing** — write Feature (and Unit, where warranted) tests per Section 13.2's checklist before considering the unit done.
-8. **Documentation** — if the unit surfaces any deviation from `ScreenSpecification.md` (should not normally happen) or resolves an Open Item, update the relevant document *only* with explicit approval, per the frozen-documentation rule.
+8. **Documentation** — if the unit surfaces any deviation from `ScreenSpecification.md` (should not normally happen) or resolves an Open Item, update the relevant document _only_ with explicit approval, per the frozen-documentation rule.
 9. **Commit** — per Section 14.3's convention, one logical change per commit.
 10. **Push** — open a Pull Request against `develop` targeting the current milestone; the PR description references the `ScreenSpecification.md` section(s) implemented.
 
@@ -558,15 +560,15 @@ This section operationalizes `Roadmap.md`'s per-feature workflow into concrete s
 
 Per `AIInstructions.md` ("Menambahkan library pihak ketiga tanpa alasan yang jelas" is disallowed), every entry below states its justification. Packages already ruled out by Binding Decisions (Spatie Permission, any SPA/frontend framework, any Repository-pattern scaffolding package) are not repeated here.
 
-| Package | Purpose | Justification |
-|---|---|---|
-| **laravel/breeze** | Auth scaffolding starting point | Already used in Sprint 0; official, minimal, Blade-based — matches the "no SPA" constraint exactly, and is trivially trimmed to the exact screens `ScreenSpecification.md` documents. |
-| **laravel/pint** | Code style fixer | Enforces PSR-12 automatically (`CodingStandards.md` PHP Standard), removing style debate from code review. Official Laravel tool, zero config needed. |
-| **larastan / phpstan** | Static analysis | Catches type errors and undefined-method mistakes (e.g. a Service method typo) before runtime — directly supports `CodingStandards.md`'s Code Quality goal ("Mudah dibaca, Konsisten"). |
-| **barryvdh/laravel-ide-helper** (dev only) | IDE autocompletion for Eloquent models/facades | Developer-experience only, no runtime footprint; helps a "new developer joining later" (explicit `CodingStandards.md` Goal) ramp up faster in VS Code. |
-| **maatwebsite/excel** | Export Report to Excel (Monitoring & Reports, `ScreenSpecification.md` 9.1's `Export Report` button) | The spec explicitly requires an export capability; hand-rolling XLSX generation is unnecessary risk versus this widely-used, actively maintained package. **Only added when v0.9 is implemented** — not needed before. |
-| **barryvdh/laravel-dompdf** | Print Service Receipt / Invoice as a downloadable PDF, in addition to the browser print view (`ScreenSpecification.md` 4.13, 7.4) | The documented Print views work via the browser's native print dialog with no package needed; this package is **optional**, only justified if the project owner later wants a "Download PDF" capability distinct from Print — flagged here as a candidate, not a current requirement. |
-| **intervention/image** | Evidence photo thumbnailing | **Not currently justified** (Section 9.4) — listed here only so that if it becomes needed, it's evaluated against this same justification bar rather than added ad hoc. |
+| Package                                    | Purpose                                                                                                                           | Justification                                                                                                                                                                                                                                                                         |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **laravel/breeze**                         | Auth scaffolding starting point                                                                                                   | Already used in Sprint 0; official, minimal, Blade-based — matches the "no SPA" constraint exactly, and is trivially trimmed to the exact screens `ScreenSpecification.md` documents.                                                                                                 |
+| **laravel/pint**                           | Code style fixer                                                                                                                  | Enforces PSR-12 automatically (`CodingStandards.md` PHP Standard), removing style debate from code review. Official Laravel tool, zero config needed.                                                                                                                                 |
+| **larastan / phpstan**                     | Static analysis                                                                                                                   | Catches type errors and undefined-method mistakes (e.g. a Service method typo) before runtime — directly supports `CodingStandards.md`'s Code Quality goal ("Mudah dibaca, Konsisten").                                                                                               |
+| **barryvdh/laravel-ide-helper** (dev only) | IDE autocompletion for Eloquent models/facades                                                                                    | Developer-experience only, no runtime footprint; helps a "new developer joining later" (explicit `CodingStandards.md` Goal) ramp up faster in VS Code.                                                                                                                                |
+| **maatwebsite/excel**                      | Export Report to Excel (Monitoring & Reports, `ScreenSpecification.md` 9.1's `Export Report` button)                              | The spec explicitly requires an export capability; hand-rolling XLSX generation is unnecessary risk versus this widely-used, actively maintained package. **Only added when v0.9 is implemented** — not needed before.                                                                |
+| **barryvdh/laravel-dompdf**                | Print Service Receipt / Invoice as a downloadable PDF, in addition to the browser print view (`ScreenSpecification.md` 4.13, 7.4) | The documented Print views work via the browser's native print dialog with no package needed; this package is **optional**, only justified if the project owner later wants a "Download PDF" capability distinct from Print — flagged here as a candidate, not a current requirement. |
+| **intervention/image**                     | Evidence photo thumbnailing                                                                                                       | **Not currently justified** (Section 9.4) — listed here only so that if it becomes needed, it's evaluated against this same justification bar rather than added ad hoc.                                                                                                               |
 
 ### 16.1 Explicitly Not Recommended
 
