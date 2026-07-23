@@ -19,9 +19,16 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'role_id',
+        'department_id',
+        'full_name',
+        'username',
         'password',
+        'email',
+        'phone',
+        'photo',
+        'is_active',
+        'last_login',
     ];
 
     /**
@@ -31,7 +38,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
     /**
@@ -42,8 +48,18 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_active' => 'boolean',
+            'last_login' => 'datetime',
         ];
+    }
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+    
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
     }
 }
